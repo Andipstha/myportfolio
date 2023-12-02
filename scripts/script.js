@@ -422,6 +422,7 @@ setInterval(() => {
 // End of Slideshow
 
 // Form Validation
+
 const form = document.querySelector(".contact-form");
 const username = document.getElementById("name");
 const email = document.getElementById("email");
@@ -464,22 +465,114 @@ const checkEmail = (input) => {
     };
 };
 
-form.addEventListener("submit", (e) => {
+function checkInputs(){
+    // form.addEventListener("submit", (e) => {
 
+        checkLength(username, 3);
+        checkLength(subject, 3);
+        checkLength(message, 10);
+        checkEmail(email);
+        checkRequiredFields([username,email,subject,message]);
+    
+        const notValid = Array.from(messages).find((messages) => {
+            return message.classList.contains("error");
+        });
+    
+        notValid && e.preventDefault();
+    // });
+}
+
+// End of Form Validation
+//Contact Form
+
+// function sendEmail(){
+//     checkInputs();
+
+//     const bodyMessage = `Full Name: ${username.value}<br> Email: ${email.value} <br> Message: ${message.value}`;
+
+//     Email.send({
+//         Host : "smtp.elasticemail.com",
+//         Username : "sandip.stha120@gmail.com",
+//         Password : "6B9015168A51E95F218772BA4D0ACC6DE785",
+//         To : 'sandip.stha120@gmail.com',
+//         From : email.value,
+//         Subject : subject.value,
+//         Body : bodyMessage
+//     }).then(
+//       message => {
+//         if(message == "OK"){
+//             Swal.fire({
+//                 title: "Success!",
+//                 text: "Message sent successfully!",
+//                 icon: "success"
+//               });
+//         }
+//       }
+//     );
+// }
+
+// form.addEventListener("submit", (e) =>{
+//     e.preventDefault();
+
+//     sendEmail();
+
+
+//     // if(!username.classList.contains("error") && !email.classList.contains("error") && !subject.classList.contains("error") && !message.classList.contains("error")){
+//     //     sendEmail();
+//     // }
+// });
+
+
+function sendEmail() {
+    const bodyMessage = `Full Name: ${username.value}<br> Email: ${email.value} <br> Message: ${message.value}`;
+  
+        Email.send({
+        Host : "smtp.elasticemail.com",
+        Username : "sandip.stha120@gmail.com",
+        Password : "6B9015168A51E95F218772BA4D0ACC6DE785",
+        To : 'sandip.stha120@gmail.com',
+        From : email.value,
+        Subject : subject.value,
+        Body : bodyMessage
+    }).then(
+      (response) => {
+        Swal.fire({
+          title: "Success!",
+          text: "Message sent successfully!",
+          icon: "success",
+        });
+      },
+      (error) => {
+        console.error("Error sending email:", error);
+        Swal.fire({
+          title: "Error!",
+          text: "Failed to send the message. Please try again.",
+          icon: "error",
+        });
+      }
+    );
+  }
+  
+  function checkInputs() {
     checkLength(username, 3);
     checkLength(subject, 3);
     checkLength(message, 10);
     checkEmail(email);
-    checkRequiredFields([username,email,subject,message]);
-
-    const notValid = Array.from(messages).find((messages) => {
-        return message.classList.contains("error");
+    checkRequiredFields([username, email, subject, message]);
+  
+    const notValid = Array.from(messages).find((message) => {
+      return message.classList.contains("error");
     });
-
-    notValid && e.preventDefault();
-});
-
-// End of Form Validation
-
+  
+    notValid && event.preventDefault();
+    sendEmail();
+  }
+  
+  // Assuming 'form' is your HTML form element
+  form.addEventListener("submit", (event) => {
+    event.preventDefault();
+    checkInputs();
+  });
+  
 
 // End of Contact Form Section 5

@@ -12,7 +12,6 @@
     <link rel="shortcut icon" href="./images/favicon.ico" type="image/x-icon">
 </head>
 <body>
-
     <!-- Mouse Circle -->
     <div class="mouse-circle"></div>
     <div class="mouse-dot"></div>
@@ -21,9 +20,9 @@
     <!-- Page Container -->
 
     <div class="container">
-          
         <!-- Page BG -->
         <div class="page-bg">
+
             <div id="snow" data-count="200"></div>
         </div>
         <!-- End of Page BG -->
@@ -256,12 +255,14 @@
     <!-- End of Page Container -->
 
     <!-- Background music -->
-    <audio id="bg-sound" autoplay loop volume="0.1">
-        <source src="/assets/background.mp3" type="audio/wav">
+    <audio id="bg-sound" autoplay loop >
+        <source src="/assets/" type="audio/wav">
         Your browser does not support the audio element.
     </audio>
     <!--End of Background music -->
 
+    <script src="https://smtpjs.com/v3/smtp.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="./scripts/script.js"></script>
     <script src="./scripts/pure-snow.js" defer></script>
 </body>
